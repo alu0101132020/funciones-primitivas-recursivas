@@ -6,10 +6,22 @@ ODIR=../src
 
 .PHONY: all
 
-_OBJ = main.o fpr.o
+_OBJ = main.o fpr.o basic-functions.o addFPR.o multiplicationFPR.o powerFPR.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 all: fpr
+
+$(ODIR)/addFPR.o: $(ODIR)/addFPR.cpp $(IDIR)/addFPR.hpp
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(ODIR)/multiplicationFPR.o: $(ODIR)/multiplicationFPR.cpp $(IDIR)/multiplicationFPR.hpp
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(ODIR)/powerFPR.o: $(ODIR)/powerFPR.cpp $(IDIR)/powerFPR.hpp
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(ODIR)/basic-functions.o: $(ODIR)/basic-functions.cpp $(IDIR)/basic-functions.hpp
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(ODIR)/fpr.o: $(ODIR)/fpr.cpp $(IDIR)/fpr.hpp
 	$(CC) -c -o $@ $< $(CFLAGS)
