@@ -7,7 +7,3 @@ FPR::FPR(void) {
 FPR::~FPR() {
 
 }
-
-FPR::FPR(void) {
-
-}

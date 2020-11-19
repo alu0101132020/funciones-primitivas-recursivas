@@ -9,47 +9,28 @@
 #include <iostream>
 #include <string.h>
 
-#include "../include/maquina-de-turing.hpp"
+#include "../include/addFPR.hpp"
+#include "../include/multiplicationFPR.hpp"
+#include "../include/powerFPR.hpp"
 
 int main(int argc, char *argv[]) {
-    if (argc < 2) {
-        std::cout << "Se han introducido menos parámetros de los esperados. Introduzca primero el nombre del fichero de definición de la máquina.\n";
-        std::cout << "Opcionalmente, se puede introducir el nombre del fichero que contenga una entrada para la máquina";
-    } else if (argc > 3) {
-        std::cout << "Se han introducido más parámetros de los esperados. Introduzca primero el nombre del fichero de definición de la máquina.\n";
-        std::cout << "Opcionalmente, se puede introducir el nombre del fichero que contenga una entrada para la máquina";
+    int x, y;
+    if (argc == 3) {
+        x = atoi(argv[1]);
+        y = atoi(argv[2]);
     } else {
-        try {
-            std::string ficheroEntrada = "";
-            if (argc == 3) {
-                ficheroEntrada = argv[2];
-            }
-            if (ficheroEntrada != "") {
-                std::ifstream inFile;
-                inFile.open(ficheroEntrada);
-                if (!inFile) {
-                    std::cout << "No se pudo abrir el fichero\n";
-                } else {
-                    MaquinaDeTuring MT(argv[1]);
-                    std::string linea;
-                    getline(inFile, linea);
-                    MT.computarInicial(linea);
-                }
-                inFile.close();
-            } else {
-                std::string continuar = "1";
-                std::string entrada = "";
-                while (continuar != "0") {
-                    MaquinaDeTuring MT(argv[1]);
-                    std::cout << "Introduzca la cadena de entrada: ";
-                    std::cin >> entrada;
-                    MT.computarInicial(entrada);
-                    std::cout << "¿Quiere probar con otra cadena? (0 si no, cualquier otro valor si sí): ";
-                    std::cin >> continuar;
-                }
-            }
-        } catch (const char* msg) {
-            std::cerr << msg << std::endl;
-        }
+        std::cout << "Introduzca la X con la que se resolverán las FPR: ";
+        std::cin >> x;
+        std::cout << "Introduzca la Y con la que se resolverán las FPR: ";
+        std::cin >> y;
     }
+    AddFPR A;
+    std::cout << "Suma (" << x << ", " << y << "): ";
+    std::cout << A.solve(x, y) << "\n";
+    MultiplicationFPR B;
+    std::cout << "Multiplicación (" << x << ", " << y << "): ";
+    std::cout << B.solve(x, y) << "\n";
+    PowerFPR C;
+    std::cout << "Potencia (" << x << ", " << y << "): ";
+    std::cout << C.solve(x, y) << "\n";
 }
